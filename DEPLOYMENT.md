@@ -74,11 +74,18 @@ This guide will help you deploy your TODO website to make it live.
 
 ### 📄 Option 3: GitHub Pages
 
+GitHub Pages offers two deployment methods for this project:
+
+#### Method A: Automated Deployment (Recommended - Uses GitHub Actions)
+
 **Steps:**
 
-1. **Update repository name** (if needed):
-   - If your repo is `username.github.io`, skip to step 2
-   - Otherwise, you'll need to update `vite.config.ts` with the base path
+1. **Create GitHub Repository:**
+   - Log in to GitHub and click the + icon in the upper-right corner, then select "New repository"
+   - For a **user site** (e.g., `username.github.io`), name it exactly `your-username.github.io`
+   - For a **project site** (e.g., `username.github.io/project-name`), you can name it anything
+   - Ensure the repository is set to **Public** (required for free GitHub Pages)
+   - Click "Create repository"
 
 2. **Push to GitHub:**
    ```bash
@@ -98,16 +105,87 @@ This guide will help you deploy your TODO website to make it live.
 
 4. **Enable GitHub Pages:**
    - Go to Settings → Pages
-   - Source: GitHub Actions
+   - Under "Build and deployment", select "Source: GitHub Actions"
    - The workflow will automatically deploy on every push to `main`
 
-5. **Update base path in vite.config.ts** (if repo name is NOT `username.github.io`):
+5. **Update base path in vite.config.ts** (only if repo name is NOT `username.github.io`):
    ```typescript
    export default defineConfig({
      base: '/YOUR_REPO_NAME/',
      // ... rest of config
    })
    ```
+
+#### Method B: Manual Branch Deployment (Git Method)
+
+This method follows the traditional GitHub Pages approach by deploying built files to a branch.
+
+**Steps:**
+
+1. **Create GitHub Repository:**
+   - Log in to GitHub and click the + icon in the upper-right corner, then select "New repository"
+   - For a **user site** (e.g., `username.github.io`), name it exactly `your-username.github.io`
+   - For a **project site** (e.g., `username.github.io/project-name`), you can name it anything
+   - Ensure the repository is set to **Public** (required for free GitHub Pages)
+   - Click "Create repository"
+
+2. **Build the project locally:**
+   ```bash
+   npm run build
+   ```
+   This creates a `dist` folder with the built website files.
+
+3. **Create and push to `gh-pages` branch:**
+   ```bash
+   # Create an orphan branch (no history)
+   git checkout --orphan gh-pages
+   
+   # Remove all files from staging
+   git rm -rf .
+   
+   # Copy built files to root
+   cp -r dist/* .
+   
+   # Add all files
+   git add .
+   
+   # Commit
+   git commit -m "Deploy to GitHub Pages"
+   
+   # Push to GitHub
+   git push origin gh-pages
+   ```
+
+4. **Configure GitHub Pages:**
+   - Go to your repository → Settings → Pages
+   - Under "Build and deployment", for "Source," select "Deploy from a branch"
+   - Use the branch dropdown menu to select `gh-pages`
+   - Select the root folder (`/`)
+   - Click "Save"
+
+5. **Update base path in vite.config.ts** (only if repo name is NOT `username.github.io`):
+   ```typescript
+   export default defineConfig({
+     base: '/YOUR_REPO_NAME/',
+     // ... rest of config
+   })
+   ```
+
+**Note:** For manual deployment, you'll need to set environment variables in a `.env.production` file before building:
+```bash
+# Create .env.production file
+echo "VITE_GOOGLE_SCRIPT_URL=your-script-url" > .env.production
+
+# Then build
+npm run build
+```
+
+**For future updates with Method B:**
+- Make changes to your code
+- Run `npm run build`
+- Switch to `gh-pages` branch: `git checkout gh-pages`
+- Copy new build: `cp -r dist/* .`
+- Commit and push: `git add . && git commit -m "Update site" && git push origin gh-pages`
 
 ---
 

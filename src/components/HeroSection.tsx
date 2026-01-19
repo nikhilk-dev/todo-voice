@@ -23,9 +23,7 @@ export const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Your own{" "}
-              <span className="gradient-text">Siri-style assistant</span>{" "}
-              for daily tasks.
+              The To-Do App That Works Without You Ever Looking at a List
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed">
               Talk to TODO and it turns what you say into organized to-dos, reminders, and simple step-by-step plans.
