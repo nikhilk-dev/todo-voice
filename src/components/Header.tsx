@@ -12,7 +12,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2.5">
             <img 
-              src="/favicon.svg" 
+              src={`${import.meta.env.BASE_URL}favicon.svg`}
               alt="TODO" 
               className="w-9 h-9 rounded-xl shadow-lg"
             />

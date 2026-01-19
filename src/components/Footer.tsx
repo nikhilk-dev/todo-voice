@@ -5,7 +5,7 @@ export const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
             <img 
-              src="/favicon.svg" 
+              src={`${import.meta.env.BASE_URL}favicon.svg`}
               alt="TODO" 
               className="w-8 h-8 rounded-lg shadow-md"
             />

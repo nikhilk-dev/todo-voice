@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO — Your Voice-First Task Assistant</title>
+    <script>
+      // GitHub Pages 404.html redirect
+      // This handles client-side routing for React Router
+      var path = window.location.pathname;
+      var segments = path.split('/').filter(Boolean);
+      
+      // If we're at the root or the base path, redirect to index.html
+      if (segments.length === 0 || (segments.length === 1 && segments[0] === 'todo-voice')) {
+        window.location.replace('/todo-voice/index.html');
+      } else {
+        // For any other path, redirect to index.html and let React Router handle it
+        window.location.replace('/todo-voice/index.html' + window.location.search + window.location.hash);
+      }
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
